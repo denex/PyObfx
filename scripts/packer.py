@@ -1,5 +1,6 @@
 import base64
 
+
 def bz2_pack(source):
     """
     Returns `source` as bzip2-compressed Python script
@@ -9,6 +10,7 @@ def bz2_pack(source):
         source.encode('utf-8'))).decode('utf-8')
     return f'import bz2,base64;exec(bz2.decompress(base64.b64decode("{compressed}")))'
 
+
 def gz_pack(source):
     """
     Returns `source` as gzip-compressed Python script
@@ -16,6 +18,7 @@ def gz_pack(source):
     import zlib
     compressed = base64.b64encode(zlib.compress(source.encode('utf-8'))).decode('utf-8')
     return f'import zlib,base64;exec(zlib.decompress(base64.b64decode("{compressed}")))'
+
 
 def lzma_pack(source):
     """

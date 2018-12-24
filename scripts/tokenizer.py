@@ -1,10 +1,12 @@
 #!/usr/bin/python3.6
 # -*- coding: utf-8 -*-
-import re
+from random import randint
+
 from pygments.lexers import Python3Lexer
 from pygments.token import Token
-from random import randint
+
 from scripts.logger import Log
+
 
 class Tokenizer:
     TOKENS = list()
@@ -25,7 +27,7 @@ class Tokenizer:
         for token in self.TOKENS:
             if token[0] == _id:
                 return token
-        return (None, None, None)
+        return None, None, None
 
     # Get token index(s) by id
     def find_index_by_id(self, _id):
@@ -74,7 +76,7 @@ class Tokenizer:
                     self.TOKENS.append(
                         (check_dict[token_value][0], check_dict[token_value][1], str(token_value)))
         except Exception as ex:
-            self.logger.log(f'{type(ex).__name__} has occured while tokenizing \n[{ex}]', state='critical')
+            self.logger.log(f'{type(ex).__name__} has occurred while tokenizing \n[{ex}]', state='critical')
         else:
             self.logger.log("Tokenized successfully.")
         # Delete ID-token dictionary

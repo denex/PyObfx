@@ -1,3 +1,5 @@
+from random import choice
+
 banner1 = """
 
  /$$$$$$$             /$$$$$$  /$$        /$$$$$$          
@@ -67,7 +69,6 @@ banner5 = """
 v1.0                    ~ https://github.com/PyObfx
 """
 
-from random import choice
 
 def print_banner():
     """
