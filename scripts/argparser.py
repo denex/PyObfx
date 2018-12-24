@@ -13,12 +13,6 @@ def cli_arg_parser() -> Dict[str, Any]:
     ex: when -f triggered, there'll be 'file' key in the dictionary.
     and values are accessible with list syntax `[]`
 
-    Test when file passed with -f keyword
-    >>> import sys
-    >>> sys.argv = [sys.argv[0], '-f', "file name"]
-    >>> cli_arg_parser()
-    {'file': 'file name', 'pack': None, 'silent': False, 'out': None, 'no_log': False, 'str_gen': None}
-
     Test when filename passed as positional argument
     >>> sys.argv = [sys.argv[0], "file name"]
     >>> cli_arg_parser()
@@ -32,10 +26,8 @@ def cli_arg_parser() -> Dict[str, Any]:
     SystemExit: 2
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("filename", nargs='?',
+    parser.add_argument("file",
                         help="File to be obfuscated. Optional")
-    parser.add_argument("-f", "--file",
-                        help="File to be obfuscated.", required=False)
     parser.add_argument("-p",
                         "--pack",
                         help="Available packers: bz2, gz, lzma")
@@ -52,12 +44,6 @@ def cli_arg_parser() -> Dict[str, Any]:
                         help="Available string generators: jp, ch, in")
     # Return to dictionary
     args = vars(parser.parse_args())
-    filename = args.pop('filename')
-    if filename:
-        args['file'] = filename
-    if not args['file']:
-        print("%s: error: the following arguments are required: -f/--file" % __file__, file=sys.stderr)
-        sys.exit(2)
     return args
 
 
